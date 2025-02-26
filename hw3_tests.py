@@ -2,6 +2,7 @@ import data
 import build_data
 import unittest
 
+import hw3
 
 # These two values are defined to support testing below. The
 # data within these structures should not be modified. Doing
@@ -180,28 +181,267 @@ class TestCases(unittest.TestCase):
 
     # Part 1
     # test population_total
+    def test_population_total(self):
+        expected = 318857056
+        result = hw3.population_total(full_data)
+        self.assertEqual(result, expected)
+
+    def test_population_total_2(self):
+        expected = 655813
+        result = hw3.population_total(reduced_data)
+        self.assertEqual(result, expected)
+
+    def test_population_total_3(self):
+        expected = 0
+        result = hw3.population_total([])
+        self.assertEqual(result, expected)
+
 
     # Part 2
     # test filter_by_state
+    def test_filter_by_state(self):
+        expected = 58
+        count = len(hw3.filter_by_state(full_data, 'CA'))
+        self.assertEqual(count, expected)
+
+    def test_filter_by_state_2(self):
+        expected = 38802500
+        result_lst = hw3.filter_by_state(full_data, 'CA')
+        pop = hw3.population_total(result_lst)
+        self.assertEqual(pop, expected)
+
+    def test_filter_by_state_3(self):
+        expected = []
+        result_lst = hw3.filter_by_state(full_data, '')
+        self.assertEqual(result_lst, expected)
+
 
     # Part 3
     # test population_by_education
+    def test_population_by_education(self):
+        expected = 92216021.0219999
+        result = hw3.population_by_education(full_data, "Bachelor's Degree or Higher")
+        self.assertAlmostEqual(result, expected)
+
+    def test_population_by_education_2(self):
+        expected = 274026015.6330008
+        result = hw3.population_by_education(full_data, "High School or Higher")
+        self.assertAlmostEqual(result, expected)
+
+    def test_population_by_education_3(self):
+        expected = 0
+        result = hw3.population_by_education(full_data, "test")
+        self.assertEqual(result, expected)
+
     # test population_by_ethnicity
+    def test_population_by_ethnicity(self):
+        expected = 17346856.55899995
+        result = hw3.population_by_ethnicity(full_data, "Asian Alone")
+        self.assertAlmostEqual(result, expected)
+
+    def test_population_by_ethnicity_2(self):
+        expected = 246661178.7359994
+        result = hw3.population_by_ethnicity(full_data, "White Alone")
+        self.assertAlmostEqual(result, expected)
+
+    def test_population_by_ethnicity_3(self):
+        expected = 0
+        result = hw3.population_by_ethnicity(full_data, "test")
+        self.assertEqual(result, expected)
+
     # test population_below_poverty_level
+    def test_population_below_poverty_level(self):
+        expected = 48996488.47399998
+        result = hw3.population_below_poverty_level(full_data)
+        self.assertAlmostEqual(result, expected)
+
+    def test_population_below_poverty_level_2(self):
+        expected = 107711.714
+        result = hw3.population_below_poverty_level(reduced_data)
+        self.assertAlmostEqual(result, expected)
+
+    def test_population_below_poverty_level_3(self):
+        expected = 0
+        result = hw3.population_below_poverty_level([])
+        self.assertEqual(result, expected)
+
 
     # Part 4
     # test percent_by_education
+    def test_percent_by_education(self):
+        expected = 28.920803001455276
+        result = hw3.percent_by_education(full_data, "Bachelor's Degree or Higher")
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_by_education_2(self):
+        expected = 85.94008207646526
+        result = hw3.percent_by_education(full_data, "High School or Higher")
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_by_education_3(self):
+        expected = 0
+        result = hw3.percent_by_education(full_data, "test")
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_by_education_4(self):
+        expected = 0
+        result = hw3.percent_by_education([], "Bachelor's Degree or Higher")
+        self.assertAlmostEqual(result, expected)
+
     # test percent_by_ethnicity
+    def test_percent_by_ethnicity(self):
+        expected = 5.440323879487852
+        result = hw3.percent_by_ethnicity(full_data, "Asian Alone")
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_by_ethnicity_2(self):
+        expected = 77.35791762939674
+        result = hw3.percent_by_ethnicity(full_data, "White Alone")
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_by_ethnicity_3(self):
+        expected = 0
+        result = hw3.percent_by_ethnicity(full_data, "test")
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_by_ethnicity_4(self):
+        expected = 0
+        result = hw3.percent_by_ethnicity([], "Asian Alone")
+        self.assertAlmostEqual(result, expected)
+
     # test percent_below_poverty_level
+    def test_percent_below_poverty_level(self):
+        expected = 15.366286413307403
+        result = hw3.percent_below_poverty_level(full_data)
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_below_poverty_level_2(self):
+        expected = 16.424150481920915
+        result = hw3.percent_below_poverty_level(reduced_data)
+        self.assertAlmostEqual(result, expected)
+
+    def test_percent_below_poverty_level_3(self):
+        expected = 0
+        result = hw3.percent_below_poverty_level([])
+        self.assertEqual(result, expected)
+
 
     # Part 5
     # test education_greater_than
-    # test education_less_than
-    # test ethnicity_greater_than
-    # test ethnicity_less_than
-    # test below_poverty_level_greater_than
-    # test below_poverty_level_less_than
+    def test_education_greater_than(self):
+        expected = 28
+        result = len(hw3.education_greater_than(full_data, "Bachelor's Degree or Higher", 50))
+        self.assertEqual(result, expected)
 
+    def test_education_greater_than_2(self):
+        expected = 3142
+        result = len(hw3.education_greater_than(full_data, "High School or Higher", 50))
+        self.assertEqual(result, expected)
+
+    def test_education_greater_than_3(self):
+        expected = 3143
+        result = len(hw3.education_greater_than(full_data, "Bachelor's Degree or Higher", 0))
+        self.assertEqual(result, expected)
+
+    def test_education_greater_than_4(self):
+        expected = []
+        result = hw3.education_greater_than(full_data, "test", 25)
+        self.assertEqual(result, expected)
+
+    # test education_less_than
+    def test_education_less_than(self):
+        expected = 2480
+        result = len(hw3.education_less_than(full_data, "Bachelor's Degree or Higher", 25))
+        self.assertEqual(result, expected)
+
+    def test_education_less_than_2(self):
+        expected = 301
+        result = len(hw3.education_less_than(full_data, "High School or Higher", 75))
+        self.assertEqual(result, expected)
+
+    def test_education_less_than_3(self):
+        expected = 3143
+        result = len(hw3.education_less_than(full_data, "Bachelor's Degree or Higher", 100))
+        self.assertEqual(result, expected)
+
+    def test_education_less_than_4(self):
+        expected = []
+        result = hw3.education_less_than(full_data, "test", 50)
+        self.assertEqual(result, expected)
+
+    # test ethnicity_greater_than
+    def test_ethnicity_greater_than(self):
+        expected = 49
+        result = len(hw3.ethnicity_greater_than(full_data, "Asian Alone", 10))
+        self.assertEqual(result, expected)
+
+    def test_ethnicity_greater_than_2(self):
+        expected = 2643
+        result = len(hw3.ethnicity_greater_than(full_data, "White Alone", 70))
+        self.assertEqual(result, expected)
+
+    def test_ethnicity_greater_than_3(self):
+        expected = 3128
+        result = len(hw3.ethnicity_greater_than(full_data, "Asian Alone", 0))
+        self.assertEqual(result, expected)
+
+    def test_ethnicity_greater_than_4(self):
+        expected = []
+        result = hw3.ethnicity_greater_than(full_data, "test", 25)
+        self.assertEqual(result, expected)
+
+    # test ethnicity_less_than
+    def test_ethnicity_less_than(self):
+        expected = 3094
+        result = len(hw3.ethnicity_less_than(full_data, "Asian Alone", 10))
+        self.assertEqual(result, expected)
+
+    def test_ethnicity_less_than_2(self):
+        expected = 499
+        result = len(hw3.ethnicity_less_than(full_data, "White Alone", 70))
+        self.assertEqual(result, expected)
+
+    def test_ethnicity_less_than_3(self):
+        expected = 3143
+        result = len(hw3.ethnicity_less_than(full_data, "Asian Alone", 100))
+        self.assertEqual(result, expected)
+
+    def test_ethnicity_less_than_4(self):
+        expected = []
+        result = hw3.ethnicity_less_than(full_data, "test", 75)
+        self.assertEqual(result, expected)
+
+    # test below_poverty_level_greater_than
+    def test_below_poverty_level_greater_than(self):
+        expected = 2265
+        result = len(hw3.below_poverty_level_greater_than(full_data, 12.5))
+        self.assertEqual(result, expected)
+
+    def test_below_poverty_level_greater_than_2(self):
+        expected = 5
+        result = len(hw3.below_poverty_level_greater_than(reduced_data, 12.5))
+        self.assertEqual(result, expected)
+
+    def test_below_poverty_level_greater_than_3(self):
+        expected = []
+        result = hw3.below_poverty_level_greater_than([], 50)
+        self.assertEqual(result, expected)
+
+    # test below_poverty_level_less_than
+    def test_below_poverty_level_less_than(self):
+        expected = 858
+        result = len(hw3.below_poverty_level_less_than(full_data, 12.5))
+        self.assertEqual(result, expected)
+
+    def test_below_poverty_level_less_than_2(self):
+        expected = 2
+        result = len(hw3.below_poverty_level_less_than(reduced_data, 12.5))
+        self.assertEqual(result, expected)
+
+    def test_below_poverty_level_less_than_3(self):
+        expected = []
+        result = hw3.below_poverty_level_less_than([], 50)
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
